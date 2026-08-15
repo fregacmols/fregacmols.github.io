@@ -3,125 +3,301 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="description" content="Personal electronics, radio, fabrication, and software projects by Carl Frega.">
   <title>evilroot.net</title>
 
   <style>
+    :root {
+      color-scheme: dark;
+      --background: #101112;
+      --panel: #17191b;
+      --panel-hover: #1c1f22;
+      --text: #d9dcdf;
+      --muted: #969da3;
+      --line: #303438;
+      --accent: #8ab4f8;
+      --warm: #d2aa63;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      background: #111;
-      color: #ddd;
+      background: var(--background);
+      color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     header {
-      padding: 80px 24px 55px;
+      padding: 84px 24px 62px;
       text-align: center;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #131516 0%, var(--background) 100%);
     }
 
     header h1 {
       margin: 0;
-      font-size: 3rem;
-      letter-spacing: 0.12em;
       color: #fff;
+      font-size: clamp(2.5rem, 9vw, 4.2rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
     }
 
     header p {
-      margin-top: 10px;
-      color: #999;
+      max-width: 650px;
+      margin: 14px auto 0;
+      color: var(--muted);
+      font-size: 1.05rem;
     }
 
     main {
-      max-width: 900px;
+      width: min(980px, calc(100% - 40px));
       margin: auto;
-      padding: 50px 24px;
+      padding: 54px 0 64px;
     }
 
     h2 {
+      margin: 0 0 22px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
       color: #fff;
-      border-bottom: 1px solid #333;
-      padding-bottom: 8px;
+      font-size: 1.45rem;
+      letter-spacing: 0.02em;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0 0 48px;
+      color: #bcc1c5;
+      font-size: 1.05rem;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 54px;
     }
 
     .project {
-      margin: 35px 0;
+      display: flex;
+      min-height: 315px;
+      padding: 24px;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel);
+      transition: background 140ms ease, border-color 140ms ease;
+    }
+
+    .project-photo {
+      display: block;
+      width: calc(100% + 48px);
+      aspect-ratio: 16 / 10;
+      margin: -24px -24px 22px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--line);
+      border-radius: 6px 6px 0 0;
+    }
+
+    .project-photo.repeater { object-position: 50% 38%; }
+    .project-photo.printer { object-position: 50% 52%; }
+
+    .project:hover {
+      border-color: #454b50;
+      background: var(--panel-hover);
+    }
+
+    .status {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      padding: 3px 9px;
+      border: 1px solid #4d4637;
+      border-radius: 999px;
+      color: var(--warm);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .project h3 {
-      margin-bottom: 5px;
+      margin: 0 0 9px;
       color: #fff;
+      font-size: 1.25rem;
+    }
+
+    .project p {
+      margin: 0 0 14px;
+      color: #b9bec2;
+    }
+
+    .details {
+      margin: auto 0 0;
+      padding-top: 18px;
+      border-top: 1px solid #292d30;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .about {
+      max-width: 760px;
+      color: #b9bec2;
+    }
+
+    .about-wrap {
+      display: grid;
+      max-width: 800px;
+      grid-template-columns: 112px 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 112px;
+      height: 112px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: 50% 35%;
+      filter: saturate(0.82) contrast(1.03);
     }
 
     a {
-      color: #8ab4f8;
+      color: var(--accent);
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
+    a:hover { text-decoration: underline; }
 
     footer {
-      max-width: 900px;
+      width: min(980px, calc(100% - 40px));
       margin: auto;
-      padding: 30px 24px 50px;
-      border-top: 1px solid #333;
-      color: #777;
+      padding: 30px 0 48px;
+      border-top: 1px solid var(--line);
+      color: #777d82;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 760px) {
+      header { padding-top: 64px; }
+      main { padding-top: 42px; }
+      .projects { grid-template-columns: 1fr; }
+      .project { min-height: 0; }
+      .about-wrap { grid-template-columns: 78px 1fr; gap: 17px; }
+      .avatar { width: 78px; height: 78px; }
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <h1>EVILROOT</h1>
+    <p>Personal projects and technical journeys since the '90s.</p>
+  </header>
 
-<header>
-  <h1>EVILROOT</h1>
-  <p>Personal projects and assorted technical nonsense since the '90s.</p>
-</header>
-
-<main>
-
-  <h2>Projects</h2>
-
-  <div class="project">
-    <h3>RotaryCell</h3>
-    <p>
-      Converting classic rotary telephones into self-contained cellular
-      phones while preserving the original user experience.
+  <main>
+    <p class="intro">
+      This is a home for the projects that accumulate around a workbench:
+      old equipment given new jobs, radio experiments, small fabrication
+      problems, and software written because the hardware needed it.
     </p>
-    <a href="#">Project page</a>
-  </div>
 
-  <div class="project">
-    <h3>MeshCore / LoRa</h3>
-    <p>
-      Mesh networking, solar-powered repeaters, radio experiments,
-      mapping, and other long-range wireless projects.
-    </p>
-    <a href="#">Projects</a>
-  </div>
+    <h2>Projects</h2>
 
-  <div class="project">
-    <h3>Amateur Radio</h3>
-    <p>
-      N1RDU — amateur radio projects, experiments, and station information.
-    </p>
-    <a href="#">Projects</a>
-  </div>
+    <section class="projects" aria-label="Current projects">
+      <article class="project">
+        <img class="project-photo" src="images/rotarycell.jpg" alt="Black rotary telephone on an electronics workbench">
+        <span class="status">Working prototype</span>
+        <h3>RotaryCell</h3>
+        <p>
+          A Western Electric Model 500 converted into a self-contained cellular
+          telephone while retaining the rotary dial, original handset, and
+          mechanical bell.
+        </p>
+        <p>
+          The current build places and receives calls and recreates traditional
+          dial, reorder, and receiver-off-hook tones.
+        </p>
+        <p class="details">Build notes and photographs are being organized.</p>
+      </article>
 
-  <h2>About</h2>
+      <article class="project">
+        <img class="project-photo repeater" src="images/meshcore-repeater.jpg" alt="Solar-powered radio repeater installed on a rooftop mast">
+        <span class="status">Field experiments</span>
+        <h3>MeshCore / LoRa</h3>
+        <p>
+          Long-range, low-power mesh networking experiments using portable
+          nodes and solar-powered repeaters.
+        </p>
+        <p>
+          Current interests include practical coverage, antenna placement,
+          power budgets, mapping, and equipment that can remain unattended.
+        </p>
+        <p class="details">Field notes and node details will appear here.</p>
+      </article>
 
-  <p>
-    Electronics, radio, fabrication, software, and whatever else
-    seems interesting enough to build.
-  </p>
+      <article class="project">
+        <img class="project-photo" src="images/amateur-radio-efhw.jpg" alt="Home-built end-fed half-wave antenna matching unit in a weatherproof enclosure">
+        <span class="status">N1RDU</span>
+        <h3>Amateur Radio</h3>
+        <p>
+          Station notes, radio projects, repair work, antennas, and experiments
+          under the call sign N1RDU.
+        </p>
+        <p>
+          This section will collect the useful details that otherwise end up in
+          notebooks, folders, and half-remembered conversations.
+        </p>
+        <p class="details">Station information and project notes are forthcoming.</p>
+      </article>
 
-</main>
+      <article class="project">
+        <img class="project-photo" src="images/drones-talon.jpg" alt="Custom fixed-wing drone under construction in a workshop">
+        <span class="status">Flight projects</span>
+        <h3>Drones</h3>
+        <p>
+          Multirotor and fixed-wing aircraft, control systems, repairs, flight
+          testing, and the inevitable collection of spare propellers.
+        </p>
+        <p>
+          This section will cover individual builds, useful modifications,
+          camera and radio equipment, and lessons learned in the field.
+        </p>
+        <p class="details">Build photographs and flight notes will be added here.</p>
+      </article>
 
-<footer>
-  <a href="https://github.com/fregacmols">GitHub</a>
-</footer>
+      <article class="project">
+        <img class="project-photo printer" src="images/3d-printing-voron.jpg" alt="Enclosed Voron 3D printer producing a large curved part">
+        <span class="status">Workshop tool</span>
+        <h3>3D Printing</h3>
+        <p>
+          Functional parts, brackets, enclosures, repair pieces, and prototypes
+          made when the right part either does not exist or takes too long to buy.
+        </p>
+        <p>
+          Models, printer changes, material notes, and the more useful finished
+          pieces will gradually be collected here.
+        </p>
+        <p class="details">Print files and project notes are forthcoming.</p>
+      </article>
+    </section>
 
+    <h2>About</h2>
+    <div class="about-wrap">
+      <img class="avatar" src="images/carl-frega.jpg" alt="Carl Frega">
+      <div class="about">
+        <p>
+          I have been taking things apart, repairing old equipment, and building
+          electronics for most of my life. This site is a deliberately informal
+          record of the results—successful, experimental, and occasionally odd.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a href="https://github.com/fregacmols">GitHub</a>
+  </footer>
 </body>
 </html>
