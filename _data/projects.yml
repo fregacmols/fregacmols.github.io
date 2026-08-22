@@ -1,0 +1,34 @@
+rotarycell:
+  name: RotaryCell
+  status: Active development
+  current: Passive audio PCB Rev A2 ordered; AG1171 carrier PCB design is next.
+  updated: 2026-08-22
+  log_tag: rotarycell
+
+meshcore:
+  name: MeshCore / LoRa
+  status: Field experiments
+  current: Long-range mesh networking, antenna placement, mapping, and unattended solar node experiments.
+  updated: No Current Logs
+  log_tag: meshcore
+
+amateur-radio:
+  name: Amateur Radio
+  status: N1RDU
+  current: Station, antenna, radio, and repair projects.
+  updated: No Current Logs
+  log_tag: amateur-radio
+
+drones:
+  name: Drones
+  status: Flight projects
+  current: Multirotor and fixed-wing builds, repairs, and flight testing.
+  updated: No Current Logs
+  log_tag: drones
+
+3d-printing:
+  name: 3D Printing
+  status: Workshop tool
+  current: Functional parts, enclosures, prototypes, and printer projects.
+  updated: No Current Logs
+  log_tag: 3d-printing

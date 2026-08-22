@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | escape }}">
+  <title>{{ page.title }} | evilroot.net</title>
+  <style>
+    :root { color-scheme: dark; --background:#101112; --panel:#17191b; --text:#d9dcdf; --muted:#969da3; --line:#303438; --accent:#8ab4f8; --warm:#d2aa63; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--background); color:var(--text); font-family:Arial,Helvetica,sans-serif; line-height:1.7; }
+    header, main, footer { width:min(820px,calc(100% - 40px)); margin:auto; }
+    header { padding:42px 0 24px; border-bottom:1px solid var(--line); }
+    header a { font-size:1.35rem; font-weight:700; letter-spacing:.1em; }
+    main { padding:44px 0 64px; }
+    h1 { color:#fff; line-height:1.2; margin:0 0 10px; }
+    h2,h3 { color:#fff; }
+    .meta { color:var(--muted); margin-bottom:34px; }
+    .tag { color:var(--warm); text-transform:uppercase; letter-spacing:.08em; font-size:.75rem; }
+    a { color:var(--accent); text-decoration:none; } a:hover{text-decoration:underline;}
+    img { max-width:100%; height:auto; border-radius:6px; }
+    code { background:var(--panel); padding:2px 5px; border-radius:3px; }
+    pre { background:var(--panel); padding:16px; overflow:auto; border:1px solid var(--line); border-radius:6px; }
+    footer { padding:26px 0 44px; border-top:1px solid var(--line); color:var(--muted); }
+  </style>
+</head>
+<body>
+<header><a href="/">EVILROOT</a> &nbsp; / &nbsp; <a href="/log/">Project Log</a></header>
+<main>
+  <span class="tag">{{ page.project_name | default: page.project }}</span>
+  <h1>{{ page.title }}</h1>
+  <div class="meta">{{ page.date | date: "%B %-d, %Y" }}</div>
+  {{ content }}
+</main>
+<footer><a href="/log/">← Project Log</a> &nbsp; · &nbsp; <a href="/">evilroot.net</a></footer>
+</body>
+</html>
