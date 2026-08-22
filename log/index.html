@@ -1,0 +1,41 @@
+---
+layout: null
+title: Project Log
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Project updates, build notes, experiments, and progress from evilroot.net.">
+  <title>Project Log | evilroot.net</title>
+  <style>
+    :root { color-scheme:dark; --background:#101112; --panel:#17191b; --panel-hover:#1c1f22; --text:#d9dcdf; --muted:#969da3; --line:#303438; --accent:#8ab4f8; --warm:#d2aa63; }
+    *{box-sizing:border-box} body{margin:0;background:var(--background);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+    header{padding:64px 24px 46px;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#131516 0%,var(--background) 100%)}
+    header h1{margin:0;color:#fff;font-size:clamp(2.1rem,7vw,3.4rem);letter-spacing:.08em} header p{color:var(--muted)}
+    main,footer{width:min(820px,calc(100% - 40px));margin:auto} main{padding:48px 0 64px}
+    .entry{padding:24px 0;border-bottom:1px solid var(--line)} .entry:first-child{padding-top:0}
+    .entry h2{margin:5px 0 8px;font-size:1.35rem}.entry p{color:#b9bec2;margin:8px 0}.meta{color:var(--muted);font-size:.9rem}.project{color:var(--warm);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem}
+    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline} footer{padding:28px 0 46px;border-top:1px solid var(--line);color:var(--muted)}
+  </style>
+</head>
+<body>
+<header><h1>PROJECT LOG</h1><p>Build notes, experiments, changes, and progress.</p></header>
+<main>
+{% if site.posts.size > 0 %}
+  {% for post in site.posts %}
+  <article class="entry">
+    <span class="project">{{ post.project_name | default: post.project }}</span>
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <div class="meta">{{ post.date | date: "%B %-d, %Y" }}</div>
+    <p>{{ post.excerpt | strip_html | truncatewords: 45 }}</p>
+  </article>
+  {% endfor %}
+{% else %}
+  <p>No Project Log entries yet.</p>
+{% endif %}
+</main>
+<footer><a href="/">← evilroot.net</a></footer>
+</body>
+</html>
