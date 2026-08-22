@@ -9,26 +9,26 @@ meshcore:
   name: MeshCore / LoRa
   status: Field experiments
   current: Long-range mesh networking, antenna placement, mapping, and unattended solar node experiments.
-  updated: 2026-08-22
+  updated: No Current Logs
   log_tag: meshcore
 
 amateur-radio:
   name: Amateur Radio
   status: N1RDU
   current: Station, antenna, radio, and repair projects.
-  updated: 2026-08-22
+  updated: No Current Logs
   log_tag: amateur-radio
 
 drones:
   name: Drones
   status: Flight projects
   current: Multirotor and fixed-wing builds, repairs, and flight testing.
-  updated: 2026-08-22
+  updated: No Current Logs
   log_tag: drones
 
 3d-printing:
   name: 3D Printing
   status: Workshop tool
   current: Functional parts, enclosures, prototypes, and printer projects.
-  updated: 2026-08-22
+  updated: No Current Logs
   log_tag: 3d-printing
