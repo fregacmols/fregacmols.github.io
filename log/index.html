@@ -11,7 +11,7 @@ title: Project Log
   <title>Project Log | evilroot.net</title>
   <style>
     :root { color-scheme:dark; --background:#101112; --panel:#17191b; --panel-hover:#1c1f22; --text:#d9dcdf; --muted:#969da3; --line:#303438; --accent:#8ab4f8; --warm:#d2aa63; }
-    *{box-sizing:border-box} body{margin:0;background:var(--background);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+    *{box-sizing:border-box}[hidden]{display:none!important} body{margin:0;background:var(--background);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
     header{padding:64px 24px 46px;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#131516 0%,var(--background) 100%)}
     header h1{margin:0;color:#fff;font-size:clamp(2.1rem,7vw,3.4rem);letter-spacing:.08em} header p{color:var(--muted)}
     main,footer{width:min(820px,calc(100% - 40px));margin:auto} main{padding:48px 0 64px}
@@ -43,6 +43,7 @@ title: Project Log
 <dialog id="editor-dialog">
   <form class="editor-form" id="entry-form">
     <h2 id="editor-title">New Project Log entry</h2>
+    <p class="editor-message" id="editor-form-message" role="alert"></p>
     <div class="fields">
       <div class="field full"><label for="entry-title">Title</label><input id="entry-title" name="title" required maxlength="120"></div>
       <div class="field"><label for="entry-project">Project</label><select id="entry-project" name="project" required><option value="rotarycell">RotaryCell</option><option value="meshcore">MeshCore / LoRa</option><option value="amateur-radio">Amateur Radio</option><option value="drones">Drones</option><option value="3d-printing">3D Printing</option></select></div>
@@ -74,6 +75,7 @@ title: Project Log
   const dialog=document.getElementById('editor-dialog');
   const form=document.getElementById('entry-form');
   const formTitle=document.getElementById('editor-title');
+  const formMessage=document.getElementById('editor-form-message');
   const title=document.getElementById('entry-title');
   const project=document.getElementById('entry-project');
   const date=document.getElementById('entry-date');
@@ -85,6 +87,7 @@ title: Project Log
   let editingSha='';
 
   function setMessage(text,type){message.textContent=text||'';message.className='editor-message'+(type?' '+type:'');}
+  function setFormMessage(text,type){formMessage.textContent=text||'';formMessage.className='editor-message'+(type?' '+type:'');}
   function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   function encode64(text){return btoa(unescape(encodeURIComponent(text)));}
   function decode64(text){return decodeURIComponent(escape(atob(text.replace(/\n/g,''))));}
@@ -124,20 +127,20 @@ title: Project Log
     }catch(error){showSignedOut('GitHub sign-in could not be used.');setMessage(error.message,'error');}
   }
   function openNew(){
-    editingPath='';editingSha='';form.reset();project.value='rotarycell';date.value=today();date.disabled=false;dateHelp.textContent='Used in the post URL.';formTitle.textContent='New Project Log entry';save.textContent='Publish entry';setMessage('');dialog.showModal();title.focus();
+    editingPath='';editingSha='';form.reset();project.value='rotarycell';date.value=today();date.disabled=false;dateHelp.textContent='Used in the post URL.';formTitle.textContent='New Project Log entry';save.textContent='Publish entry';setMessage('');setFormMessage('');dialog.showModal();title.focus();
   }
   async function openEdit(path){
     setMessage('Loading entry…');
     try{
       const file=await api('/repos/'+REPO+'/contents/'+encodeURIComponent(path).replace(/%2F/g,'/')+'?ref='+encodeURIComponent(BRANCH));
-      const post=parsePost(decode64(file.content),path);editingPath=path;editingSha=file.sha;title.value=post.title;project.value=post.project;date.value=post.date;date.disabled=true;dateHelp.textContent='The publication date is fixed for an existing entry.';body.value=post.body;formTitle.textContent='Edit Project Log entry';save.textContent='Save changes';setMessage('');dialog.showModal();title.focus();
+      const post=parsePost(decode64(file.content),path);editingPath=path;editingSha=file.sha;title.value=post.title;project.value=post.project;date.value=post.date;date.disabled=true;dateHelp.textContent='The publication date is fixed for an existing entry.';body.value=post.body;formTitle.textContent='Edit Project Log entry';save.textContent='Save changes';setMessage('');setFormMessage('');dialog.showModal();title.focus();
     }catch(error){setMessage(error.message,'error');}
   }
   async function submitEntry(event){
     event.preventDefault();
     if(!form.reportValidity())return;
     const path=editingPath||('_posts/'+date.value+'-'+slugify(title.value)+'.md');
-    save.disabled=true;save.textContent=editingPath?'Saving…':'Publishing…';
+    setFormMessage('');save.disabled=true;save.textContent=editingPath?'Saving…':'Publishing…';
     try{
       if(!editingPath){
         const check=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+encodeURIComponent(path).replace(/%2F/g,'/')+'?ref='+encodeURIComponent(BRANCH),{headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}});
@@ -148,8 +151,7 @@ title: Project Log
       if(editingSha)payload.sha=editingSha;
       await api('/repos/'+REPO+'/contents/'+encodeURIComponent(path).replace(/%2F/g,'/'),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
       dialog.close();setMessage('Saved to GitHub. The public page will update after GitHub Pages finishes rebuilding.','success');
-      setTimeout(()=>window.location.reload(),3500);
-    }catch(error){setMessage(error.message,'error');}
+    }catch(error){setFormMessage(error.message,'error');}
     finally{save.disabled=false;save.textContent=editingPath?'Save changes':'Publish entry';}
   }
 
