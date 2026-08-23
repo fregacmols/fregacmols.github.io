@@ -87,16 +87,16 @@ title: Project Log
   function setMessage(text,type){message.textContent=text||'';message.className='editor-message'+(type?' '+type:'');}
   function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   function encode64(text){return btoa(unescape(encodeURIComponent(text)));}
-  function decode64(text){return decodeURIComponent(escape(atob(text.replace(/\\n/g,''))));}
+  function decode64(text){return decodeURIComponent(escape(atob(text.replace(/\n/g,''))));}
   function slugify(text){return text.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80)||'project-update';}
   function quoteYaml(text){return JSON.stringify(text);}
-  function buildPost(){return '---\\nlayout: post\\ntitle: '+quoteYaml(title.value.trim())+'\\nproject: '+project.value+'\\nproject_name: '+projects[project.value]+'\\n---\\n\\n'+body.value.trim()+'\\n';}
+  function buildPost(){return '---\nlayout: post\ntitle: '+quoteYaml(title.value.trim())+'\nproject: '+project.value+'\nproject_name: '+projects[project.value]+'\n---\n\n'+body.value.trim()+'\n';}
   function parsePost(text,path){
-    const match=text.match(/^---\\r?\\n([\\s\\S]*?)\\r?\\n---\\r?\\n?([\\s\\S]*)$/);
+    const match=text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
     if(!match)throw new Error('This post does not have recognizable front matter.');
     const meta={};
-    match[1].split(/\\r?\\n/).forEach(line=>{const i=line.indexOf(':');if(i<0)return;let value=line.slice(i+1).trim();if(value.startsWith('"')){try{value=JSON.parse(value);}catch(e){}}meta[line.slice(0,i).trim()]=value;});
-    const dateMatch=path.match(/_posts\\/(\\d{4}-\\d{2}-\\d{2})-/);
+    match[1].split(/\r?\n/).forEach(line=>{const i=line.indexOf(':');if(i<0)return;let value=line.slice(i+1).trim();if(value.startsWith('"')){try{value=JSON.parse(value);}catch(e){}}meta[line.slice(0,i).trim()]=value;});
+    const dateMatch=path.match(/_posts\/(\d{4}-\d{2}-\d{2})-/);
     return {title:meta.title||'',project:meta.project||'rotarycell',date:dateMatch?dateMatch[1]:today(),body:match[2].trim()};
   }
   async function api(path,options){
