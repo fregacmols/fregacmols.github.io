@@ -15,7 +15,7 @@ title: Project Log
     header{padding:64px 24px 46px;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#131516 0%,var(--background) 100%)}
     header h1{margin:0;color:#fff;font-size:clamp(2.1rem,7vw,3.4rem);letter-spacing:.08em} header p{color:var(--muted)}
     main,footer{width:min(820px,calc(100% - 40px));margin:auto} main{padding:48px 0 64px}
-    .cmsauth{margin-top:18px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}.cmsauth button,.editor-tools button,.edit-entry,.actions button{border:1px solid var(--line);background:var(--panel);color:var(--accent);border-radius:5px;padding:9px 14px;cursor:pointer;font-size:14px}.cmsauth button:hover,.editor-tools button:hover,.edit-entry:hover,.actions button:hover{border-color:#555d63;background:var(--panel-hover)}.cmsauth span{color:var(--muted);font-size:.86rem}.editor-tools{display:flex;justify-content:flex-end;margin-bottom:24px}.edit-entry{float:right;padding:5px 10px;font-size:12px}.editor-message{min-height:1.5em;margin:0 0 18px;color:var(--muted);font-size:.9rem}.editor-message.error{color:#ef9a9a}.editor-message.success{color:#9dcc9d}dialog{width:min(700px,calc(100% - 32px));max-height:calc(100vh - 32px);padding:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text)}dialog::backdrop{background:rgba(0,0,0,.72)}.editor-form{padding:24px}.editor-form h2{margin:0 0 20px;color:#fff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{color:#b9bec2;font-size:.88rem}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:5px;background:#101214;color:var(--text);padding:10px 11px;font:inherit}.field textarea{min-height:260px;resize:vertical;font-family:Consolas,monospace;line-height:1.5}.field small{color:var(--muted)}.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.actions .primary{background:#21344f;border-color:#46658c;color:#dce9fa}.actions button:disabled{opacity:.55;cursor:wait}@media(max-width:600px){.fields{grid-template-columns:1fr}.field.full{grid-column:auto}}
+    .cmsauth{margin-top:18px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}.cmsauth button,.editor-tools button,.edit-entry,.actions button{border:1px solid var(--line);background:var(--panel);color:var(--accent);border-radius:5px;padding:9px 14px;cursor:pointer;font-size:14px}.cmsauth button:hover,.editor-tools button:hover,.edit-entry:hover,.actions button:hover{border-color:#555d63;background:var(--panel-hover)}.cmsauth span{color:var(--muted);font-size:.86rem}.editor-tools{display:flex;justify-content:flex-end;margin-bottom:24px}.edit-entry{float:right;padding:5px 10px;font-size:12px}.editor-message{min-height:1.5em;margin:0 0 18px;color:var(--muted);font-size:.9rem}.editor-message.error{color:#ef9a9a}.editor-message.success{color:#9dcc9d}dialog{width:min(700px,calc(100% - 32px));max-height:calc(100vh - 32px);padding:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text)}dialog::backdrop{background:rgba(0,0,0,.72)}.editor-form{padding:24px}.editor-form h2{margin:0 0 20px;color:#fff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{color:#b9bec2;font-size:.88rem}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:5px;background:#101214;color:var(--text);padding:10px 11px;font:inherit}.field textarea{min-height:260px;resize:vertical;font-family:Consolas,monospace;line-height:1.5}.field small{color:var(--muted)}.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.actions .primary{background:#21344f;border-color:#46658c;color:#dce9fa}.actions button:disabled{opacity:.55;cursor:wait}.image-actions{display:flex;align-items:center;gap:12px;margin-top:8px}.image-actions button{border:1px dashed #586168;background:#121416;color:var(--accent);border-radius:5px;padding:8px 12px;cursor:pointer}.attachments{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:12px}.attachment{position:relative;padding:8px;border:1px solid var(--line);border-radius:6px;background:#111315}.attachment img{display:block;width:100%;height:110px;object-fit:cover;border-radius:4px;background:#090a0b}.attachment input{width:100%;margin-top:7px;border:1px solid var(--line);border-radius:4px;background:#0e1011;color:var(--text);padding:6px;font-size:.78rem}.attachment button{position:absolute;top:13px;right:13px;width:26px;height:26px;padding:0;border:1px solid #754b4b;border-radius:50%;background:#291b1b;color:#f1c0c0;cursor:pointer}.attachment-size{display:block;margin-top:5px;color:var(--muted);font-size:.72rem}@media(max-width:600px){.fields{grid-template-columns:1fr}.field.full{grid-column:auto}}
     .entry{padding:24px 0;border-bottom:1px solid var(--line)} .entry:first-child{padding-top:0}
     .entry h2{margin:5px 0 8px;font-size:1.35rem}.entry p{color:#b9bec2;margin:8px 0}.meta{color:var(--muted);font-size:.9rem}.project{color:var(--warm);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem}
     a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline} footer{padding:28px 0 46px;border-top:1px solid var(--line);color:var(--muted)}
@@ -48,7 +48,7 @@ title: Project Log
       <div class="field full"><label for="entry-title">Title</label><input id="entry-title" name="title" required maxlength="120"></div>
       <div class="field"><label for="entry-project">Project</label><select id="entry-project" name="project" required><option value="rotarycell">RotaryCell</option><option value="meshcore">MeshCore / LoRa</option><option value="amateur-radio">Amateur Radio</option><option value="drones">Drones</option><option value="3d-printing">3D Printing</option></select></div>
       <div class="field"><label for="entry-date">Publication date</label><input id="entry-date" name="date" type="date" required><small id="date-help">Used in the post URL.</small></div>
-      <div class="field full"><label for="entry-body">Entry (Markdown)</label><textarea id="entry-body" name="body" required></textarea><small>Blank lines separate paragraphs. Markdown links, lists, headings, and images are supported.</small></div>
+      <div class="field full"><label for="entry-body">Entry (Markdown)</label><textarea id="entry-body" name="body" required></textarea><div class="image-actions"><button type="button" id="add-images">Add images</button><small>Or paste an image directly with Ctrl+V.</small></div><input id="image-input" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden><div class="attachments" id="attachments" hidden></div><small>Blank lines separate paragraphs. Markdown links, lists, headings, and images are supported.</small></div>
     </div>
     <div class="actions"><button type="button" id="cancel-entry">Cancel</button><button type="submit" class="primary" id="save-entry">Publish entry</button></div>
   </form>
@@ -82,6 +82,10 @@ title: Project Log
   const dateHelp=document.getElementById('date-help');
   const body=document.getElementById('entry-body');
   const save=document.getElementById('save-entry');
+  const addImages=document.getElementById('add-images');
+  const imageInput=document.getElementById('image-input');
+  const attachmentsPanel=document.getElementById('attachments');
+  let attachments=[];
   let token='';
   let editingPath='';
   let editingSha='';
@@ -93,7 +97,91 @@ title: Project Log
   function decode64(text){return decodeURIComponent(escape(atob(text.replace(/\n/g,''))));}
   function slugify(text){return text.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80)||'project-update';}
   function quoteYaml(text){return JSON.stringify(text);}
-  function buildPost(){return '---\nlayout: post\ntitle: '+quoteYaml(title.value.trim())+'\nproject: '+project.value+'\nproject_name: '+projects[project.value]+'\n---\n\n'+body.value.trim()+'\n';}
+  function buildPost(entryBody){return '---\nlayout: post\ntitle: '+quoteYaml(title.value.trim())+'\nproject: '+project.value+'\nproject_name: '+projects[project.value]+'\n---\n\n'+entryBody.trim()+'\n';}
+  function readAsDataUrl(blob){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error('Could not read the image.'));reader.readAsDataURL(blob);});}
+  async function prepareImage(file){
+    if(!file||!file.type.startsWith('image/'))throw new Error('Only image files can be added.');
+    const supported=['image/png','image/jpeg','image/webp'];
+    let output=file;
+    let type=supported.includes(file.type)?file.type:'image/png';
+    if('createImageBitmap' in window){
+      const bitmap=await createImageBitmap(file);
+      const maxDimension=2400;
+      const scale=Math.min(1,maxDimension/Math.max(bitmap.width,bitmap.height));
+      if(scale<1||!supported.includes(file.type)){
+        const canvas=document.createElement('canvas');
+        canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+        canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+        canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
+        output=await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error('Could not resize the image.')),type,type==='image/jpeg'?0.88:undefined));
+      }
+      bitmap.close();
+    }
+    if(output.size>12*1024*1024)throw new Error('That image is still larger than 12 MB after processing.');
+    return {dataUrl:await readAsDataUrl(output),type,size:output.size};
+  }
+  function extensionFor(type){return type==='image/jpeg'?'jpg':type==='image/webp'?'webp':'png';}
+  function insertAtCursor(markdown){
+    const start=body.selectionStart;
+    const end=body.selectionEnd;
+    const before=body.value.slice(0,start);
+    const after=body.value.slice(end);
+    const prefix=before&& !before.endsWith('\n')?'\n\n':'';
+    const suffix=after&& !after.startsWith('\n')?'\n\n':'';
+    body.value=before+prefix+markdown+suffix+after;
+    const position=(before+prefix+markdown).length;
+    body.focus();body.setSelectionRange(position,position);
+  }
+  function attachmentPattern(id){return new RegExp('!\\[[^\\]]*\\]\\(attachment:'+id+'\\)','g');}
+  function renderAttachments(){
+    attachmentsPanel.replaceChildren();
+    attachmentsPanel.hidden=attachments.length===0;
+    attachments.forEach(item=>{
+      const card=document.createElement('div');card.className='attachment';
+      const preview=document.createElement('img');preview.src=item.dataUrl;preview.alt=item.alt;
+      const remove=document.createElement('button');remove.type='button';remove.textContent='×';remove.setAttribute('aria-label','Remove image');
+      const alt=document.createElement('input');alt.type='text';alt.value=item.alt;alt.placeholder='Image description';alt.setAttribute('aria-label','Image description');
+      const size=document.createElement('span');size.className='attachment-size';size.textContent=Math.max(1,Math.round(item.size/1024))+' KB';
+      alt.addEventListener('input',()=>{item.alt=alt.value||'Project image';preview.alt=item.alt;body.value=body.value.replace(attachmentPattern(item.id),'!['+item.alt+'](attachment:'+item.id+')');});
+      remove.addEventListener('click',()=>{body.value=body.value.replace(attachmentPattern(item.id),'').replace(/\n{3,}/g,'\n\n');attachments=attachments.filter(candidate=>candidate.id!==item.id);renderAttachments();});
+      card.append(preview,remove,alt,size);attachmentsPanel.append(card);
+    });
+  }
+  async function addImage(file){
+    setFormMessage('Preparing image…');
+    const prepared=await prepareImage(file);
+    const id=Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+    const item={id,alt:'Pasted image',dataUrl:prepared.dataUrl,type:prepared.type,size:prepared.size};
+    attachments.push(item);insertAtCursor('!['+item.alt+'](attachment:'+item.id+')');renderAttachments();setFormMessage('');
+  }
+  async function addImageFiles(files){
+    try{for(const file of files)await addImage(file);}catch(error){setFormMessage(error.message,'error');}
+  }
+  function clearAttachments(){attachments=[];attachmentsPanel.replaceChildren();attachmentsPanel.hidden=true;}
+  function resolveAttachments(postDate,postSlug){
+    let resolvedBody=body.value;
+    const files=[];
+    attachments.forEach((item,index)=>{
+      const filename=postSlug+'-'+String(index+1).padStart(2,'0')+'-'+item.id+'.'+extensionFor(item.type);
+      const path='images/log/'+postDate.slice(0,4)+'/'+postDate.slice(5,7)+'/'+filename;
+      resolvedBody=resolvedBody.replace(new RegExp('attachment:'+item.id,'g'),'/'+path);
+      files.push({path,content:item.dataUrl.slice(item.dataUrl.indexOf(',')+1),encoding:'base64'});
+    });
+    if(/attachment:[a-z0-9]+/i.test(resolvedBody))throw new Error('The post contains an image placeholder whose image is no longer attached.');
+    return {body:resolvedBody,files};
+  }
+  async function commitFiles(files,commitMessage){
+    const ref=await api('/repos/'+REPO+'/git/ref/heads/'+encodeURIComponent(BRANCH));
+    const parent=await api('/repos/'+REPO+'/git/commits/'+ref.object.sha);
+    const treeEntries=[];
+    for(const file of files){
+      const blob=await api('/repos/'+REPO+'/git/blobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:file.content,encoding:file.encoding||'utf-8'})});
+      treeEntries.push({path:file.path,mode:'100644',type:'blob',sha:blob.sha});
+    }
+    const tree=await api('/repos/'+REPO+'/git/trees',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({base_tree:parent.tree.sha,tree:treeEntries})});
+    const commit=await api('/repos/'+REPO+'/git/commits',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:commitMessage,tree:tree.sha,parents:[ref.object.sha]})});
+    await api('/repos/'+REPO+'/git/refs/heads/'+encodeURIComponent(BRANCH),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({sha:commit.sha,force:false})});
+  }
   function parsePost(text,path){
     const match=text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
     if(!match)throw new Error('This post does not have recognizable front matter.');
@@ -127,13 +215,13 @@ title: Project Log
     }catch(error){showSignedOut('GitHub sign-in could not be used.');setMessage(error.message,'error');}
   }
   function openNew(){
-    editingPath='';editingSha='';form.reset();project.value='rotarycell';date.value=today();date.disabled=false;dateHelp.textContent='Used in the post URL.';formTitle.textContent='New Project Log entry';save.textContent='Publish entry';setMessage('');setFormMessage('');dialog.showModal();title.focus();
+    editingPath='';editingSha='';clearAttachments();form.reset();project.value='rotarycell';date.value=today();date.disabled=false;dateHelp.textContent='Used in the post URL.';formTitle.textContent='New Project Log entry';save.textContent='Publish entry';setMessage('');setFormMessage('');dialog.showModal();title.focus();
   }
   async function openEdit(path){
     setMessage('Loading entry…');
     try{
       const file=await api('/repos/'+REPO+'/contents/'+encodeURIComponent(path).replace(/%2F/g,'/')+'?ref='+encodeURIComponent(BRANCH));
-      const post=parsePost(decode64(file.content),path);editingPath=path;editingSha=file.sha;title.value=post.title;project.value=post.project;date.value=post.date;date.disabled=true;dateHelp.textContent='The publication date is fixed for an existing entry.';body.value=post.body;formTitle.textContent='Edit Project Log entry';save.textContent='Save changes';setMessage('');setFormMessage('');dialog.showModal();title.focus();
+      const post=parsePost(decode64(file.content),path);clearAttachments();editingPath=path;editingSha=file.sha;title.value=post.title;project.value=post.project;date.value=post.date;date.disabled=true;dateHelp.textContent='The publication date is fixed for an existing entry.';body.value=post.body;formTitle.textContent='Edit Project Log entry';save.textContent='Save changes';setMessage('');setFormMessage('');dialog.showModal();title.focus();
     }catch(error){setMessage(error.message,'error');}
   }
   async function submitEntry(event){
@@ -147,10 +235,11 @@ title: Project Log
         if(check.ok)throw new Error('An entry with this date and title already exists. Change the title or edit the existing entry.');
         if(check.status!==404){const data=await check.json().catch(()=>({}));throw new Error(data.message||'Could not check the proposed filename.');}
       }
-      const payload={message:(editingPath?'Update':'Add')+' Project Log entry: '+title.value.trim(),content:encode64(buildPost()),branch:BRANCH};
-      if(editingSha)payload.sha=editingSha;
-      await api('/repos/'+REPO+'/contents/'+encodeURIComponent(path).replace(/%2F/g,'/'),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      dialog.close();setMessage('Saved to GitHub. The public page will update after GitHub Pages finishes rebuilding.','success');
+      const slug=slugify(title.value);
+      const resolved=resolveAttachments(date.value,slug);
+      const files=resolved.files.concat([{path,content:buildPost(resolved.body),encoding:'utf-8'}]);
+      await commitFiles(files,(editingPath?'Update':'Add')+' Project Log entry: '+title.value.trim());
+      dialog.close();clearAttachments();setMessage('Saved to GitHub. The public page will update after GitHub Pages finishes rebuilding.','success');
     }catch(error){setFormMessage(error.message,'error');}
     finally{save.disabled=false;save.textContent=editingPath?'Save changes':'Publish entry';}
   }
@@ -166,7 +255,10 @@ title: Project Log
   login.addEventListener('click',()=>{status.textContent='Waiting for GitHub…';const popup=window.open(AUTH_URL,'evilroot-github-auth','width=720,height=760');if(!popup)status.textContent='Popup blocked. Please allow popups and try again.';});
   logout.addEventListener('click',()=>{showSignedOut();setMessage('Signed out of the Project Log editor.','success');});
   document.getElementById('new-entry').addEventListener('click',openNew);
-  document.getElementById('cancel-entry').addEventListener('click',()=>dialog.close());
+  document.getElementById('cancel-entry').addEventListener('click',()=>{clearAttachments();dialog.close();});
+  addImages.addEventListener('click',()=>imageInput.click());
+  imageInput.addEventListener('change',()=>{addImageFiles(Array.from(imageInput.files||[]));imageInput.value='';});
+  body.addEventListener('paste',event=>{const files=Array.from(event.clipboardData&&event.clipboardData.items||[]).filter(item=>item.type.startsWith('image/')).map(item=>item.getAsFile()).filter(Boolean);if(!files.length)return;event.preventDefault();addImageFiles(files);});
   form.addEventListener('submit',submitEntry);
   document.querySelectorAll('.edit-entry').forEach(button=>button.addEventListener('click',()=>openEdit(button.dataset.path)));
   dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
