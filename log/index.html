@@ -11,22 +11,25 @@ title: Project Log
   <title>Project Log | evilroot.net</title>
   <style>
     :root { color-scheme:dark; --background:#101112; --panel:#17191b; --panel-hover:#1c1f22; --text:#d9dcdf; --muted:#969da3; --line:#303438; --accent:#8ab4f8; --warm:#d2aa63; }
-    *{box-sizing:border-box} body{margin:0;background:var(--background);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+    *{box-sizing:border-box}[hidden]{display:none!important} body{margin:0;background:var(--background);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
     header{padding:64px 24px 46px;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#131516 0%,var(--background) 100%)}
     header h1{margin:0;color:#fff;font-size:clamp(2.1rem,7vw,3.4rem);letter-spacing:.08em} header p{color:var(--muted)}
     main,footer{width:min(820px,calc(100% - 40px));margin:auto} main{padding:48px 0 64px}
-    .cmsauth{margin-top:18px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}.cmsauth button{border:1px solid var(--line);background:var(--panel);color:var(--accent);border-radius:5px;padding:9px 14px;cursor:pointer;font-size:14px}.cmsauth span{color:var(--muted);font-size:.86rem}
+    .cmsauth{margin-top:18px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}.cmsauth button,.editor-tools button,.edit-entry,.actions button{border:1px solid var(--line);background:var(--panel);color:var(--accent);border-radius:5px;padding:9px 14px;cursor:pointer;font-size:14px}.cmsauth button:hover,.editor-tools button:hover,.edit-entry:hover,.actions button:hover{border-color:#555d63;background:var(--panel-hover)}.cmsauth span{color:var(--muted);font-size:.86rem}.editor-tools{display:flex;justify-content:flex-end;margin-bottom:24px}.edit-entry{float:right;padding:5px 10px;font-size:12px}.editor-message{min-height:1.5em;margin:0 0 18px;color:var(--muted);font-size:.9rem}.editor-message.error{color:#ef9a9a}.editor-message.success{color:#9dcc9d}dialog{width:min(700px,calc(100% - 32px));max-height:calc(100vh - 32px);padding:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text)}dialog::backdrop{background:rgba(0,0,0,.72)}.editor-form{padding:24px}.editor-form h2{margin:0 0 20px;color:#fff}.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{color:#b9bec2;font-size:.88rem}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:5px;background:#101214;color:var(--text);padding:10px 11px;font:inherit}.field textarea{min-height:260px;resize:vertical;font-family:Consolas,monospace;line-height:1.5}.field small{color:var(--muted)}.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.actions .primary{background:#21344f;border-color:#46658c;color:#dce9fa}.actions button:disabled{opacity:.55;cursor:wait}@media(max-width:600px){.fields{grid-template-columns:1fr}.field.full{grid-column:auto}}
     .entry{padding:24px 0;border-bottom:1px solid var(--line)} .entry:first-child{padding-top:0}
     .entry h2{margin:5px 0 8px;font-size:1.35rem}.entry p{color:#b9bec2;margin:8px 0}.meta{color:var(--muted);font-size:.9rem}.project{color:var(--warm);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem}
     a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline} footer{padding:28px 0 46px;border-top:1px solid var(--line);color:var(--muted)}
   </style>
 </head>
 <body>
-<header><h1>PROJECT LOG</h1><p>Build notes, experiments, changes, and progress.</p><div class="cmsauth"><button type="button" id="github-login">Sign in with GitHub</button><span id="github-status">Sign in to edit the Project Log.</span></div></header>
+<header><h1>PROJECT LOG</h1><p>Build notes, experiments, changes, and progress.</p><div class="cmsauth"><button type="button" id="github-login">Sign in with GitHub</button><button type="button" id="github-logout" hidden>Sign out</button><span id="github-status">Sign in to edit the Project Log.</span></div></header>
 <main>
+<div class="editor-tools" id="editor-tools" hidden><button type="button" id="new-entry">+ New entry</button></div>
+<p class="editor-message" id="editor-message" role="status" aria-live="polite"></p>
 {% if site.posts.size > 0 %}
   {% for post in site.posts %}
   <article class="entry">
+    <button type="button" class="edit-entry" data-path="{{ post.path | escape }}" hidden>Edit</button>
     <span class="project">{{ post.project_name | default: post.project }}</span>
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
     <div class="meta">{{ post.date | date: "%B %-d, %Y" }}</div>
@@ -37,9 +40,138 @@ title: Project Log
   <p>No Project Log entries yet.</p>
 {% endif %}
 </main>
+<dialog id="editor-dialog">
+  <form class="editor-form" id="entry-form">
+    <h2 id="editor-title">New Project Log entry</h2>
+    <p class="editor-message" id="editor-form-message" role="alert"></p>
+    <div class="fields">
+      <div class="field full"><label for="entry-title">Title</label><input id="entry-title" name="title" required maxlength="120"></div>
+      <div class="field"><label for="entry-project">Project</label><select id="entry-project" name="project" required><option value="rotarycell">RotaryCell</option><option value="meshcore">MeshCore / LoRa</option><option value="amateur-radio">Amateur Radio</option><option value="drones">Drones</option><option value="3d-printing">3D Printing</option></select></div>
+      <div class="field"><label for="entry-date">Publication date</label><input id="entry-date" name="date" type="date" required><small id="date-help">Used in the post URL.</small></div>
+      <div class="field full"><label for="entry-body">Entry (Markdown)</label><textarea id="entry-body" name="body" required></textarea><small>Blank lines separate paragraphs. Markdown links, lists, headings, and images are supported.</small></div>
+    </div>
+    <div class="actions"><button type="button" id="cancel-entry">Cancel</button><button type="submit" class="primary" id="save-entry">Publish entry</button></div>
+  </form>
+</dialog>
 <footer><a href="/">← evilroot.net</a></footer>
 <script>
-(()=>{const login=document.getElementById('github-login');const status=document.getElementById('github-status');if(!login)return;const tokenPrefix='#github_token=';if(window.location.hash.startsWith(tokenPrefix)){const token=decodeURIComponent(window.location.hash.slice(tokenPrefix.length));if(window.opener&&!window.opener.closed){window.opener.postMessage({type:'authorization:github:success',token},window.location.origin);window.close();return;}sessionStorage.setItem('evilroot_github_token',token);history.replaceState(null,'',window.location.pathname+window.location.search);}const savedToken=sessionStorage.getItem('evilroot_github_token');if(savedToken){status.textContent='GitHub authentication successful.';login.textContent='Signed in with GitHub';login.disabled=true;}login.addEventListener('click',()=>{status.textContent='Waiting for GitHub…';const popup=window.open('https://evilroot-cms-auth.evilroot.workers.dev/auth','evilroot-github-auth','width=720,height=760');if(!popup)status.textContent='Popup blocked. Please allow popups and try again.';});window.addEventListener('message',event=>{if(event.origin!==window.location.origin)return;if(!event.data||event.data.type!=='authorization:github:success'||!event.data.token)return;sessionStorage.setItem('evilroot_github_token',event.data.token);status.textContent='GitHub authentication successful.';login.textContent='Signed in with GitHub';login.disabled=true;});})();
+(()=>{
+  const REPO='fregacmols/fregacmols.github.io';
+  const BRANCH='main';
+  const AUTH_URL='https://evilroot-cms-auth.evilroot.workers.dev/auth';
+  const TOKEN_KEY='evilroot_github_token';
+  const projects={
+    'rotarycell':'RotaryCell',
+    'meshcore':'MeshCore / LoRa',
+    'amateur-radio':'Amateur Radio',
+    'drones':'Drones',
+    '3d-printing':'3D Printing'
+  };
+  const login=document.getElementById('github-login');
+  const logout=document.getElementById('github-logout');
+  const status=document.getElementById('github-status');
+  const tools=document.getElementById('editor-tools');
+  const message=document.getElementById('editor-message');
+  const dialog=document.getElementById('editor-dialog');
+  const form=document.getElementById('entry-form');
+  const formTitle=document.getElementById('editor-title');
+  const formMessage=document.getElementById('editor-form-message');
+  const title=document.getElementById('entry-title');
+  const project=document.getElementById('entry-project');
+  const date=document.getElementById('entry-date');
+  const dateHelp=document.getElementById('date-help');
+  const body=document.getElementById('entry-body');
+  const save=document.getElementById('save-entry');
+  let token='';
+  let editingPath='';
+  let editingSha='';
+
+  function setMessage(text,type){message.textContent=text||'';message.className='editor-message'+(type?' '+type:'');}
+  function setFormMessage(text,type){formMessage.textContent=text||'';formMessage.className='editor-message'+(type?' '+type:'');}
+  function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function encode64(text){return btoa(unescape(encodeURIComponent(text)));}
+  function decode64(text){return decodeURIComponent(escape(atob(text.replace(/\n/g,''))));}
+  function slugify(text){return text.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80)||'project-update';}
+  function quoteYaml(text){return JSON.stringify(text);}
+  function buildPost(){return '---\nlayout: post\ntitle: '+quoteYaml(title.value.trim())+'\nproject: '+project.value+'\nproject_name: '+projects[project.value]+'\n---\n\n'+body.value.trim()+'\n';}
+  function parsePost(text,path){
+    const match=text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+    if(!match)throw new Error('This post does not have recognizable front matter.');
+    const meta={};
+    match[1].split(/\r?\n/).forEach(line=>{const i=line.indexOf(':');if(i<0)return;let value=line.slice(i+1).trim();if(value.startsWith('"')){try{value=JSON.parse(value);}catch(e){}}meta[line.slice(0,i).trim()]=value;});
+    const dateMatch=path.match(/_posts\/(\d{4}-\d{2}-\d{2})-/);
+    return {title:meta.title||'',project:meta.project||'rotarycell',date:dateMatch?dateMatch[1]:today(),body:match[2].trim()};
+  }
+  async function api(path,options){
+    const response=await fetch('https://api.github.com'+path,Object.assign({},options,{headers:Object.assign({'Accept':'application/vnd.github+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28'},options&&options.headers)}));
+    if(response.status===204)return null;
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.message||('GitHub returned '+response.status+'.'));
+    return data;
+  }
+  function showAuthenticated(user){
+    status.textContent='Signed in as @'+user.login+'.';login.hidden=true;logout.hidden=false;tools.hidden=false;
+    document.querySelectorAll('.edit-entry').forEach(button=>button.hidden=false);
+  }
+  function showSignedOut(text){
+    token='';sessionStorage.removeItem(TOKEN_KEY);status.textContent=text||'Sign in to edit the Project Log.';login.hidden=false;logout.hidden=true;tools.hidden=true;
+    document.querySelectorAll('.edit-entry').forEach(button=>button.hidden=true);
+  }
+  async function useToken(value){
+    token=value;status.textContent='Checking GitHub access…';
+    try{
+      const user=await api('/user');
+      const repo=await api('/repos/'+REPO);
+      if(!repo.permissions||!repo.permissions.push)throw new Error('@'+user.login+' does not have permission to edit this repository.');
+      sessionStorage.setItem(TOKEN_KEY,token);showAuthenticated(user);setMessage('');
+    }catch(error){showSignedOut('GitHub sign-in could not be used.');setMessage(error.message,'error');}
+  }
+  function openNew(){
+    editingPath='';editingSha='';form.reset();project.value='rotarycell';date.value=today();date.disabled=false;dateHelp.textContent='Used in the post URL.';formTitle.textContent='New Project Log entry';save.textContent='Publish entry';setMessage('');setFormMessage('');dialog.showModal();title.focus();
+  }
+  async function openEdit(path){
+    setMessage('Loading entry…');
+    try{
+      const file=await api('/repos/'+REPO+'/contents/'+encodeURIComponent(path).replace(/%2F/g,'/')+'?ref='+encodeURIComponent(BRANCH));
+      const post=parsePost(decode64(file.content),path);editingPath=path;editingSha=file.sha;title.value=post.title;project.value=post.project;date.value=post.date;date.disabled=true;dateHelp.textContent='The publication date is fixed for an existing entry.';body.value=post.body;formTitle.textContent='Edit Project Log entry';save.textContent='Save changes';setMessage('');setFormMessage('');dialog.showModal();title.focus();
+    }catch(error){setMessage(error.message,'error');}
+  }
+  async function submitEntry(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    const path=editingPath||('_posts/'+date.value+'-'+slugify(title.value)+'.md');
+    setFormMessage('');save.disabled=true;save.textContent=editingPath?'Saving…':'Publishing…';
+    try{
+      if(!editingPath){
+        const check=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+encodeURIComponent(path).replace(/%2F/g,'/')+'?ref='+encodeURIComponent(BRANCH),{headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}});
+        if(check.ok)throw new Error('An entry with this date and title already exists. Change the title or edit the existing entry.');
+        if(check.status!==404){const data=await check.json().catch(()=>({}));throw new Error(data.message||'Could not check the proposed filename.');}
+      }
+      const payload={message:(editingPath?'Update':'Add')+' Project Log entry: '+title.value.trim(),content:encode64(buildPost()),branch:BRANCH};
+      if(editingSha)payload.sha=editingSha;
+      await api('/repos/'+REPO+'/contents/'+encodeURIComponent(path).replace(/%2F/g,'/'),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      dialog.close();setMessage('Saved to GitHub. The public page will update after GitHub Pages finishes rebuilding.','success');
+    }catch(error){setFormMessage(error.message,'error');}
+    finally{save.disabled=false;save.textContent=editingPath?'Save changes':'Publish entry';}
+  }
+
+  const tokenPrefix='#github_token=';
+  if(window.location.hash.startsWith(tokenPrefix)){
+    const callbackToken=decodeURIComponent(window.location.hash.slice(tokenPrefix.length));
+    if(window.opener&&!window.opener.closed){window.opener.postMessage({type:'authorization:github:success',token:callbackToken},window.location.origin);window.close();return;}
+    history.replaceState(null,'',window.location.pathname+window.location.search);useToken(callbackToken);
+  }else{
+    const saved=sessionStorage.getItem(TOKEN_KEY);if(saved)useToken(saved);
+  }
+  login.addEventListener('click',()=>{status.textContent='Waiting for GitHub…';const popup=window.open(AUTH_URL,'evilroot-github-auth','width=720,height=760');if(!popup)status.textContent='Popup blocked. Please allow popups and try again.';});
+  logout.addEventListener('click',()=>{showSignedOut();setMessage('Signed out of the Project Log editor.','success');});
+  document.getElementById('new-entry').addEventListener('click',openNew);
+  document.getElementById('cancel-entry').addEventListener('click',()=>dialog.close());
+  form.addEventListener('submit',submitEntry);
+  document.querySelectorAll('.edit-entry').forEach(button=>button.addEventListener('click',()=>openEdit(button.dataset.path)));
+  dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
+  window.addEventListener('message',event=>{if(event.origin!==window.location.origin)return;if(!event.data||event.data.type!=='authorization:github:success'||!event.data.token)return;useToken(event.data.token);});
+})();
 </script>
 </body>
 </html>
