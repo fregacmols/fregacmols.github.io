@@ -1,8 +1,8 @@
 rotarycell:
   name: RotaryCell
   status: Working prototype
-  current: Two custom PCBs have reached the Gerber stage; physical fit and first-board validation are next.
-  updated: 2026-08-23
+  current: The hand-wired prototype is operational on firmware v0.10.4; the Audio/Reset A4 and through-hole AG1171 carrier PCBs are ordered and awaiting validation.
+  updated: 2026-08-28
   log_tag: rotarycell
 
 meshcore:
