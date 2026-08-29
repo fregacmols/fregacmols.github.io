@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hardware Interation: Power Reset!"
+title: "Hardware Iteration: Power Reset!"
 project: rotarycell
 project_name: RotaryCell
 image: "/images/log/2026/08/hardware-interation-power-reset-01-mtdcl3xvlhml0.png"
