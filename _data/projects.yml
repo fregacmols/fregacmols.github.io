@@ -1,8 +1,8 @@
 rotarycell:
   name: RotaryCell
-  status: Working prototype
-  current: The hand-wired prototype is operational on firmware v0.10.4; the Audio/Reset A4 and through-hole AG1171 carrier PCBs are ordered and awaiting validation.
-  updated: 2026-08-28
+  status: Working builds
+  current: Multiple phones are operational with the custom carrier and Audio/Reset boards. A draft build guide is now available for review while the documentation and rear USB-C mounts continue to be refined.
+  updated: 2026-09-20
   log_tag: rotarycell
 
 meshcore:
