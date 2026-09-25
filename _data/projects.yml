@@ -1,8 +1,8 @@
 rotarycell:
   name: RotaryCell
-  status: Working builds
-  current: Multiple phones are operational with the custom carrier and Audio/Reset boards. A draft build guide is now available for review while the documentation and rear USB-C mounts continue to be refined.
-  updated: 2026-09-20
+  status: Documented build
+  current: Multiple phones are operational with the custom carrier and Audio/Reset boards. The complete illustrated build guide is available online.
+  updated: 2026-09-25
   log_tag: rotarycell
 
 meshcore:
