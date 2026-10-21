@@ -1,0 +1,97 @@
+backend:
+  name: github
+  repo: fregacmols/fregacmols.github.io
+  branch: main
+  base_url: https://REPLACE-WITH-OAUTH-WORKER
+  auth_endpoint: auth
+
+site_url: https://evilroot.net
+display_url: https://evilroot.net
+logo_url: https://evilroot.net/images/rotary-phone.jpg
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+publish_mode: simple
+
+collections:
+  - name: "project_log"
+    label: "Project Log"
+    label_singular: "Project Log Entry"
+    folder: "_posts"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "log/{{year}}/{{month}}/{{day}}/{{slug}}/"
+    summary: "{{date}} — {{project_name}} — {{title}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Project"
+        name: "project"
+        widget: "select"
+        options:
+          - { label: "RotaryCell", value: "rotarycell" }
+          - { label: "MeshCore / LoRa", value: "meshcore" }
+          - { label: "Amateur Radio", value: "amateur-radio" }
+          - { label: "Drones", value: "drones" }
+          - { label: "3D Printing", value: "3d-printing" }
+      - label: "Project Name"
+        name: "project_name"
+        widget: "select"
+        options: ["RotaryCell", "MeshCore / LoRa", "Amateur Radio", "Drones", "3D Printing"]
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Entry", name: "body", widget: "markdown" }
+
+  - name: "project_status"
+    label: "Project Status"
+    files:
+      - label: "All Projects"
+        name: "projects"
+        file: "_data/projects.yml"
+        fields:
+          - label: "RotaryCell"
+            name: "rotarycell"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "hidden", default: "RotaryCell" }
+              - { label: "Status", name: "status", widget: "string" }
+              - { label: "Current", name: "current", widget: "text" }
+              - { label: "Last Updated", name: "updated", widget: "string", hint: "Use YYYY-MM-DD, or No Current Logs." }
+              - { label: "Log Tag", name: "log_tag", widget: "hidden", default: "rotarycell" }
+          - label: "MeshCore / LoRa"
+            name: "meshcore"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "hidden", default: "MeshCore / LoRa" }
+              - { label: "Status", name: "status", widget: "string" }
+              - { label: "Current", name: "current", widget: "text" }
+              - { label: "Last Updated", name: "updated", widget: "string", hint: "Use YYYY-MM-DD, or No Current Logs." }
+              - { label: "Log Tag", name: "log_tag", widget: "hidden", default: "meshcore" }
+          - label: "Amateur Radio"
+            name: "amateur-radio"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "hidden", default: "Amateur Radio" }
+              - { label: "Status", name: "status", widget: "string" }
+              - { label: "Current", name: "current", widget: "text" }
+              - { label: "Last Updated", name: "updated", widget: "string", hint: "Use YYYY-MM-DD, or No Current Logs." }
+              - { label: "Log Tag", name: "log_tag", widget: "hidden", default: "amateur-radio" }
+          - label: "Drones"
+            name: "drones"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "hidden", default: "Drones" }
+              - { label: "Status", name: "status", widget: "string" }
+              - { label: "Current", name: "current", widget: "text" }
+              - { label: "Last Updated", name: "updated", widget: "string", hint: "Use YYYY-MM-DD, or No Current Logs." }
+              - { label: "Log Tag", name: "log_tag", widget: "hidden", default: "drones" }
+          - label: "3D Printing"
+            name: "3d-printing"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "hidden", default: "3D Printing" }
+              - { label: "Status", name: "status", widget: "string" }
+              - { label: "Current", name: "current", widget: "text" }
+              - { label: "Last Updated", name: "updated", widget: "string", hint: "Use YYYY-MM-DD, or No Current Logs." }
+              - { label: "Log Tag", name: "log_tag", widget: "hidden", default: "3d-printing" }
